@@ -1,0 +1,146 @@
+<script lang="ts">
+import { defineComponent, reactive, ref, computed } from "vue";
+import GameCell from "./GameCell.vue";
+
+type Player = "red" | "yellow";
+
+export default defineComponent({
+  name: "GameBoard",
+  components: {
+    GameCell,
+  },
+  setup() {
+    const ROWS = 6;
+    const COLS = 7;
+
+    const board = reactive<(Player | null)[][]>(
+      Array.from({ length: ROWS }, () => Array(COLS).fill(null))
+    );
+
+    const currentPlayer = ref<Player>("red");
+    const winner = ref<Player | null>(null);
+
+    function dropDisc(col: number) {
+      if (winner.value) return;
+
+      for (let row = ROWS - 1; row >= 0; row--) {
+        if (!board[row][col]) {
+          board[row][col] = currentPlayer.value;
+          if (checkWinner(row, col)) {
+            winner.value = currentPlayer.value;
+          } else {
+            currentPlayer.value =
+              currentPlayer.value === "red" ? "yellow" : "red";
+          }
+          break;
+        }
+      }
+    }
+
+    function checkWinner(row: number, col: number): boolean {
+      const directions = [
+        [0, 1],
+        [1, 0],
+        [1, 1],
+        [1, -1],
+      ];
+      const player = board[row][col];
+      if (!player) return false;
+
+      for (const [dr, dc] of directions) {
+        let count = 1;
+
+        for (let i = 1; i < 4; i++) {
+          const r = row + dr * i;
+          const c = col + dc * i;
+          if (
+            r < 0 ||
+            r >= ROWS ||
+            c < 0 ||
+            c >= COLS ||
+            board[r][c] !== player
+          )
+            break;
+          count++;
+        }
+
+        for (let i = 1; i < 4; i++) {
+          const r = row - dr * i;
+          const c = col - dc * i;
+          if (
+            r < 0 ||
+            r >= ROWS ||
+            c < 0 ||
+            c >= COLS ||
+            board[r][c] !== player
+          )
+            break;
+          count++;
+        }
+
+        if (count >= 4) return true;
+      }
+
+      return false;
+    }
+
+    function resetGame() {
+      for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+          board[r][c] = null;
+        }
+      }
+      currentPlayer.value = "red";
+      winner.value = null;
+    }
+
+    return {
+      board,
+      currentPlayer,
+      winner,
+      COLS,
+      ROWS,
+      dropDisc,
+      resetGame,
+    };
+  },
+});
+</script>
+
+<template>
+  <div class="space-y-4 text-center">
+    <div
+      class="text-xl font-bold py-2 px-4 rounded shadow inline-block"
+      :class="
+        winner
+          ? winner === 'red'
+            ? 'bg-red-500 text-white'
+            : 'bg-yellow-400 text-black'
+          : 'bg-blue-100 text-blue-800'
+      "
+    >
+      <span v-if="winner">🎉 {{ winner }} wins!</span>
+      <span v-else>{{ currentPlayer }}'s turn</span>
+    </div>
+
+    <div class="grid grid-cols-7 gap-2 justify-center">
+      <div
+        v-for="colIndex in COLS"
+        :key="colIndex"
+        class="cursor-pointer"
+        @click="dropDisc(colIndex - 1)"
+      >
+        <div v-for="rowIndex in ROWS" :key="rowIndex">
+          <GameCell :value="board[rowIndex - 1][colIndex - 1]" />
+        </div>
+      </div>
+    </div>
+
+    <button
+      @click="resetGame"
+      class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+    >
+      Restart Game
+    </button>
+  </div>
+</template>
