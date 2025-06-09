@@ -1,5 +1,32 @@
-# Vue 3 + TypeScript + Vite
+# 🔴🟡 Connect Four Game - Vue 3 + TypeScript
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A simple and interactive Connect Four game built with **Vue 3**, **TypeScript**, **Vite**, and **Tailwind CSS**.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## ✨ Features
+
+- ✅ Turn-based 2-player gameplay (Red vs Yellow)
+- ✅ Win detection (horizontal, vertical, diagonal)
+- ✅ Highlighted result display
+- ✅ Board reset functionality
+- ✅ Responsive and mobile-friendly layout
+- 🚧 Future ideas: AI opponent, animations, multiplayer mode
+
+---
+
+## 🛠️ Tech Stack
+
+- [Vue 3](https://vuejs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/longnghoang/connect-four-vue3-demo.git
+cd connect-four-vue3-demo
+```
