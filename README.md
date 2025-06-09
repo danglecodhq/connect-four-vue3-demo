@@ -22,6 +22,16 @@ A simple and interactive Connect Four game built with **Vue 3**, **TypeScript**,
 
 ---
 
+## 📁 Project Structure
+
+src/
+├── assets/ # Static assets (optional)
+├── components/
+│ ├── GameBoard.vue
+│ └── GameCell.vue
+├── App.vue
+└── main.ts
+
 ## 🚀 Getting Started
 
 ### 1. Clone the repository
@@ -29,4 +39,12 @@ A simple and interactive Connect Four game built with **Vue 3**, **TypeScript**,
 ```bash
 git clone https://github.com/longnghoang/connect-four-vue3-demo.git
 cd connect-four-vue3-demo
+
+```
+
+### 2. Install dependencies and run the development server
+
+```bash
+npm install
+npm run dev
 ```
