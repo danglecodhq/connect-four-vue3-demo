@@ -5,7 +5,7 @@ export default defineComponent({
   name: "GameCell",
   props: {
     value: {
-      type: String as () => "red" | "yellow" | null,
+      type: String as () => "red" | "yellow" | "blue" | null,
       default: null,
     },
   },
@@ -20,7 +20,11 @@ export default defineComponent({
       v-if="value"
       :class="[
         'w-10 h-10 rounded-full',
-        value === 'red' ? 'bg-red-500' : 'bg-yellow-400',
+        value === 'red'
+          ? 'bg-red-500'
+          : value === 'yellow'
+          ? 'bg-yellow-400'
+          : 'bg-blue-500',
       ]"
     />
   </div>

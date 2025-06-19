@@ -1,8 +1,8 @@
 <script lang="ts">
-import { defineComponent, reactive, ref, computed } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 import GameCell from "./GameCell.vue";
 
-type Player = "red" | "yellow";
+type Player = "red" | "yellow" | "blue";
 
 export default defineComponent({
   name: "GameBoard",
@@ -13,11 +13,13 @@ export default defineComponent({
     const ROWS = 6;
     const COLS = 7;
 
+    const players: Player[] = ["red", "yellow", "blue"];
     const board = reactive<(Player | null)[][]>(
       Array.from({ length: ROWS }, () => Array(COLS).fill(null))
     );
 
-    const currentPlayer = ref<Player>("red");
+    const currentPlayerIndex = ref(0);
+    const currentPlayer = ref<Player>(players[currentPlayerIndex.value]);
     const winner = ref<Player | null>(null);
 
     function dropDisc(col: number) {
@@ -29,8 +31,9 @@ export default defineComponent({
           if (checkWinner(row, col)) {
             winner.value = currentPlayer.value;
           } else {
-            currentPlayer.value =
-              currentPlayer.value === "red" ? "yellow" : "red";
+            currentPlayerIndex.value =
+              (currentPlayerIndex.value + 1) % players.length;
+            currentPlayer.value = players[currentPlayerIndex.value];
           }
           break;
         }
@@ -90,7 +93,8 @@ export default defineComponent({
           board[r][c] = null;
         }
       }
-      currentPlayer.value = "red";
+      currentPlayerIndex.value = 0;
+      currentPlayer.value = players[0];
       winner.value = null;
     }
 
@@ -115,7 +119,13 @@ export default defineComponent({
         winner
           ? winner === 'red'
             ? 'bg-red-500 text-white'
-            : 'bg-yellow-400 text-black'
+            : winner === 'yellow'
+            ? 'bg-yellow-400 text-black'
+            : 'bg-blue-500 text-white'
+          : currentPlayer === 'red'
+          ? 'bg-red-100 text-red-800'
+          : currentPlayer === 'yellow'
+          ? 'bg-yellow-100 text-yellow-800'
           : 'bg-blue-100 text-blue-800'
       "
     >
