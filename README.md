@@ -1,4 +1,4 @@
-# 🔴🟡 Connect Four Game - Vue 3 + TypeScript
+# 🔴🟡🔵 Connect Four Game – Vue 3 + TypeScript
 
 A simple and interactive Connect Four game built with **Vue 3**, **TypeScript**, **Vite**, and **Tailwind CSS**.
 
