@@ -4,7 +4,7 @@ A simple and interactive Connect Four game built with **Vue 3**, **TypeScript**,
 
 ## ✨ Features
 
-- ✅ Turn-based 2-player gameplay (Red vs Yellow)
+- ✅ Turn-based 3-player gameplay (Red vs Yellow vs Blue)
 - ✅ Win detection (horizontal, vertical, diagonal)
 - ✅ Highlighted result display
 - ✅ Board reset functionality
@@ -44,7 +44,43 @@ cd connect-four-vue3-demo
 
 ### 2. Install dependencies and run the development server
 
+## 🛠️ Prerequisites
+
+Before installing dependencies, ensure that your system has:
+
+- Node.js v18 or higher installed  
+  This project uses modern ECMAScript features and requires Node.js 18+ to ensure compatibility with the development tooling (e.g., Vite, TypeScript, and Tailwind CSS).  
+  Download the latest LTS version from: https://nodejs.org
+
+To verify your Node.js version:
+
+```bash
+node -v
+# Should output v18.x.x or higher
+```
+
+## 📦 Installation
+
+Install dependencies after verifying Node.js version:
+
 ```bash
 npm install
+```
+
+## 🚀 Run Locally
+
+To start the development server:
+
+```bash
 npm run dev
+```
+
+The app will be available at http://localhost:5173
+
+## 🧪 Testing
+
+To run unit tests (if set up with Vitest or Jest):
+
+```bash
+npm run test
 ```
