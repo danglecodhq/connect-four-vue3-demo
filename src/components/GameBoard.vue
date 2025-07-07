@@ -27,6 +27,12 @@ export default defineComponent({
 
       for (let row = ROWS - 1; row >= 0; row--) {
         if (!board[row][col]) {
+
+           // Play drop sound
+      const audio = new Audio('/drop.mp3');
+      audio.play();
+
+
           board[row][col] = currentPlayer.value;
           if (checkWinner(row, col)) {
             winner.value = currentPlayer.value;
@@ -133,14 +139,21 @@ export default defineComponent({
       <span v-else>{{ currentPlayer }}'s turn</span>
     </div>
 
-    <div class="grid grid-cols-7 gap-2 justify-center">
+    <div
+      class="bg-blue-100 border-8 border-blue-900 rounded-xl grid grid-rows-6 grid-cols-7 gap-0.5 shadow-lg"
+      style="width: fit-content; margin: 0 auto;"
+    >
       <div
-        v-for="colIndex in COLS"
-        :key="colIndex"
-        class="cursor-pointer"
-        @click="dropDisc(colIndex - 1)"
+        v-for="rowIndex in ROWS"
+        :key="rowIndex"
+        style="display: contents"
       >
-        <div v-for="rowIndex in ROWS" :key="rowIndex">
+        <div
+          v-for="colIndex in COLS"
+          :key="colIndex"
+          class="cursor-pointer"
+          @click="dropDisc(colIndex - 1)"
+        >
           <GameCell :value="board[rowIndex - 1][colIndex - 1]" />
         </div>
       </div>
@@ -148,9 +161,11 @@ export default defineComponent({
 
     <button
       @click="resetGame"
-      class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+      class="mt-4 px-4 py-2 bg-blue-500 text-black rounded hover:bg-blue-600"
     >
       Restart Game
     </button>
+
+   
   </div>
 </template>

@@ -14,8 +14,8 @@ export default defineComponent({
 
 <template>
   <div
-    class="w-12 h-12 rounded-full border-2 border-blue-700 bg-blue-200 flex items-center justify-center overflow-hidden"
-  >
+     class="w-12 h-12 bg-white border border-blue-200 flex items-center justify-center text-2xl font-caveat transition-colors"
+>
     <transition name="drop" mode="out-in">
       <div
         v-if="value"
