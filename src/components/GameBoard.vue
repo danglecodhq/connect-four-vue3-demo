@@ -29,12 +29,16 @@ export default defineComponent({
         if (!board[row][col]) {
 
            // Play drop sound
-      const audio = new Audio('/drop.mp3');
+      const audio = new Audio('/player-action-a.mp3');
       audio.play();
 
 
           board[row][col] = currentPlayer.value;
           if (checkWinner(row, col)) {
+            // Play winner sound
+              const audio_winner = new Audio('/reward.mp3');
+             audio_winner.play();
+             
             winner.value = currentPlayer.value;
           } else {
             currentPlayerIndex.value =
